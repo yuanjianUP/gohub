@@ -19,6 +19,7 @@ func Validate(obj interface{}, c *gin.Context, handler ValidateFun) bool {
 		return false
 	}
 	errs := handler(obj, c)
+
 	if len(errs) > 0 {
 		response.ValidationError(c, errs)
 		return false

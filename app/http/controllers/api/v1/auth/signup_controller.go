@@ -35,13 +35,23 @@ func (sc *SignupController) SignupUsingEmail(c *gin.Context) {
 	//验证表单
 	request := requests.SignupUsingEmailRequest{}
 	ok := requests.Validate(&request, c, requests.SignupUsingEmail)
+	response.JSON(c, gin.H{
+		"data": ok,
+	})
 	if !ok {
 		return
 	}
 	userModel := user.User{
 		Name:     request.Name,
 		Email:    request.Email,
-		Password: request.PassWord,
+		Password: request.Password,
 	}
 	userModel.Create()
+	if userModel.ID > 0 {
+		response.CreatedJSON(c, gin.H{
+			"data": userModel,
+		})
+	} else {
+		response.Abort500(c, "创建用户失败，请稍后尝试")
+	}
 }

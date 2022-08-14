@@ -15,9 +15,9 @@ type SignupEmailExistRequest struct {
 type SignupUsingEmailRequest struct {
 	Email           string `json:"email,omitempty" valid:"email"`
 	VerifyCode      string `json:"verify_code,omitempty" valid:"verify_code"`
-	Name            string `json:"name" valid:"name"`
-	PassWord        string `json:"password,omitempty" valid:"password"`
-	PassWordConfirm string `json:"password_confirm,omitempty" valid:"password_confirm"`
+	Name            string `valid:"name" json:"name"`
+	Password        string `valid:"password" json:"password,omitempty"`
+	PasswordConfirm string `valid:"password_confirm" json:"password_confirm,omitempty"`
 }
 
 func ValidateSignupPhoneExist(data interface{}, c *gin.Context) map[string][]string {
@@ -54,21 +54,22 @@ func ValidateSignupEmailExist(data interface{}, c *gin.Context) map[string][]str
 	// 开始验证
 	return validate(data, rules, messages)
 }
-func SignupUsingEmail(data interface{}, c *gin.Context) map[string][]string {
+
+func SignupUsingEmail(data interface{}, c *gin.Context) map[string][]string { //注册用户
 	rules := govalidator.MapData{
 		"email":            []string{"required", "min:4", "max:30", "email"},
-		"name":             []string{"required", "alpha_num", "between:3,20", "not_exists:users,name"},
+		"name":             []string{"required", "alpha_num", "between:3,20"},
 		"password":         []string{"required", "min:6"},
 		"password_confirm": []string{"required"},
 		"verify_code":      []string{"required", "digits:6"},
 	}
-	message := govalidator.MapData{
+	messages := govalidator.MapData{
 		"email": []string{
 			"required:email 必须填写",
 			"min:email 长度需要大于4",
 			"max:email 长度小于 30",
 			"email:email格式不正确",
-			"not_exxists:email已经占用",
+			"not_exists:email已经占用",
 		},
 		"name": []string{
 			"required:name 必须填写",
@@ -87,9 +88,10 @@ func SignupUsingEmail(data interface{}, c *gin.Context) map[string][]string {
 			"digits:验证码长度必须为6位的数字",
 		},
 	}
-	errs := validate(data, rules, message)
+
+	errs := validate(data, rules, messages)
 	_data := data.(*SignupUsingEmailRequest)
-	errs = validators.ValidatePasswordConfirm(_data.PassWord, _data.PassWordConfirm, errs)
+	errs = validators.ValidatePasswordConfirm(_data.Password, _data.PasswordConfirm, errs)
 	errs = validators.ValidateVerifyCode(_data.Email, _data.VerifyCode, errs)
 	return errs
 }
