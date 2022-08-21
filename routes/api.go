@@ -22,6 +22,8 @@ func RegisterAPIRoutes(router *gin.Engine) {
 
 			authGroup.POST("/login/using-password", loginCtr.LoginByPassword)
 			authGroup.POST("/login/refresh-token", loginCtr.RefreshToken)
+			pac := new(auth.PasswordController)
+			authGroup.POST("/password-reset/using-email", pac.ResetByEmail) //邮箱找回密码
 		}
 
 	}
