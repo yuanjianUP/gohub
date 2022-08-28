@@ -3,12 +3,15 @@ package routes
 import (
 	"github.com/gin-gonic/gin"
 	"gohub/app/http/controllers/api/v1/auth"
+	"gohub/app/http/middlewares"
 )
 
 func RegisterAPIRoutes(router *gin.Engine) {
-	v1 := router.Group("v1")
+	v1 := router.Group("/v1")
+	v1.Use(middlewares.LimitIP("200-H"))
 	{
-		authGroup := v1.Group("auth")
+		authGroup := v1.Group("/auth")
+		authGroup.Use(middlewares.LimitIP("1000-H"))
 		{
 			SupCt := new(auth.SignupController)
 			authGroup.POST("/signup/phone/exist", SupCt.IsPhoneExist)
