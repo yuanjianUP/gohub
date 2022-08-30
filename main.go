@@ -38,6 +38,7 @@ func main() {
 	//注册字命令
 	rootCmd.AddCommand(
 		cmd2.CmdServe,
+		cmd.Cmdkey,
 	)
 	//配置默认运行web服务
 	cmd.RegisterDefaultCmd(rootCmd, cmd2.CmdServe)
