@@ -3,15 +3,17 @@ package main
 import (
 	"flag"
 	"fmt"
-	"github.com/gin-gonic/gin"
-	"github.com/spf13/cobra"
 	"gohub/app/cmd"
+	"gohub/app/cmd/make"
 	"gohub/bootstrap"
 	btsConfig "gohub/config"
 	cmd2 "gohub/pkg/cmd"
 	"gohub/pkg/config"
 	"gohub/pkg/console"
 	"os"
+
+	"github.com/gin-gonic/gin"
+	"github.com/spf13/cobra"
 )
 
 func init() {
@@ -40,6 +42,7 @@ func main() {
 		cmd2.CmdServe,
 		cmd.Cmdkey,
 		cmd.CmdPlay,
+		make.CmdMake,
 	)
 	//配置默认运行web服务
 	cmd.RegisterDefaultCmd(rootCmd, cmd2.CmdServe)
