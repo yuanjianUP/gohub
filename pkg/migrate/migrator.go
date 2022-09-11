@@ -3,6 +3,7 @@ package migrate
 import (
 	"gohub/pkg/console"
 	"gohub/pkg/database"
+	"gohub/pkg/file"
 	"os"
 
 	"gorm.io/gorm"
@@ -56,7 +57,7 @@ func (migrator *Migrator) Up() {
 	//可以通过此值来判断数据库是否已是最新
 	runed := false
 	//对迁移文件进行遍历，如果没有执行过，就执行up回调
-	for _, mfile := range migrationFiles {
+	for _, mfile := range migrateFiles {
 		//对比文件名称，看是否已经运行过
 		if mfile.isNotMigrated(migrations) {
 			migrator.runUpMigration(mfile, batch)

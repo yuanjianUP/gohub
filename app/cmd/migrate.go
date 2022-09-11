@@ -12,10 +12,7 @@ var CmdMigrate = &cobra.Command{
 	Short: "Run database migration",
 	//所有migrate下的子命令都会执行一下代码
 }
-var CmdMigrate = &cobra.Command{
-	Use:   "migrate",
-	Short: "Run database migration",
-}
+
 var CmdMigrateUp = &cobra.Command{
 	Use:   "up",
 	Short: "run unmigrated migrations",
