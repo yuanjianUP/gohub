@@ -25,11 +25,23 @@ var CmdMigrateRollback = &cobra.Command{
 	Short:   "reverse the up command",
 	Run:     runDown,
 }
+var CmdMigrateRest = &cobra.Command{
+	Use:   "reset",
+	Short: "rollback all database migrations",
+	Run:   runReset,
+}
+var CmdMigrateRefresh = &cobra.Command{
+	Use:   "refresh",
+	Short: "reset and re-run all migrations",
+	Run:   runRefresh,
+}
 
 func init() {
 	CmdMigrate.AddCommand(
 		CmdMigrateUp,
 		CmdMigrateRollback,
+		CmdMigrateRefresh,
+		CmdMigrateRest,
 	)
 }
 func migrator() *migrate.Migrator {
@@ -43,4 +55,10 @@ func runUp(cmd *cobra.Command, args []string) {
 }
 func runDown(cmd *cobra.Command, args []string) {
 	migrator().Rollback()
+}
+func runReset(cmd *cobra.Command, args []string) {
+	migrator().Reset()
+}
+func runRefresh(cmd *cobra.Command, args []string) {
+	migrator().Refresh()
 }
