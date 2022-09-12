@@ -1,15 +1,21 @@
 package routes
 
 import (
-	"github.com/gin-gonic/gin"
+	controllers "gohub/app/http/controllers/api/v1"
 	"gohub/app/http/controllers/api/v1/auth"
 	"gohub/app/http/middlewares"
+
+	"github.com/gin-gonic/gin"
 )
 
 func RegisterAPIRoutes(router *gin.Engine) {
 	v1 := router.Group("/v1")
 	v1.Use(middlewares.LimitIP("200-H"))
 	{
+		uc := new(controllers.UsersController)
+		//获取当前用户
+		v1.GET("/user", middlewares.AuthJWT(), uc.CurrentUser)
+
 		authGroup := v1.Group("/auth")
 		authGroup.Use(middlewares.LimitIP("1000-H"))
 		{
@@ -27,6 +33,7 @@ func RegisterAPIRoutes(router *gin.Engine) {
 			authGroup.POST("/login/refresh-token", loginCtr.RefreshToken)
 			pac := new(auth.PasswordController)
 			authGroup.POST("/password-reset/using-email", pac.ResetByEmail) //邮箱找回密码
+
 		}
 
 	}

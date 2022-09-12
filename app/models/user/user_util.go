@@ -29,3 +29,6 @@ func Get(idstr string) (userModel User) {
 	database.DB.Where("id", idstr).First(&userModel)
 	return
 }
+func All() {
+
+}

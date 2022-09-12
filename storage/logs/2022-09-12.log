@@ -1,0 +1,97 @@
+2022-09-12 13:42:25	[31mERROR[0m	response/response.go:74	Error Occurred:	{"error": "signature is invalid"}
+gohub/pkg/response.Error
+	/Users/yuanjian/Desktop/go/github.com/yuanjianUP/gohub/pkg/response/response.go:74
+gohub/app/http/controllers/api/v1/auth.(*LoginController).RefreshToken
+	/Users/yuanjian/Desktop/go/github.com/yuanjianUP/gohub/app/http/controllers/api/v1/auth/login_controller.go:37
+github.com/gin-gonic/gin.(*Context).Next
+	/Users/yuanjian/go/pkg/mod/github.com/gin-gonic/gin@v1.8.1/context.go:173
+gohub/app/http/middlewares.LimitIP.func1
+	/Users/yuanjian/Desktop/go/github.com/yuanjianUP/gohub/app/http/middlewares/limit.go:23
+github.com/gin-gonic/gin.(*Context).Next
+	/Users/yuanjian/go/pkg/mod/github.com/gin-gonic/gin@v1.8.1/context.go:173
+gohub/app/http/middlewares.LimitIP.func1
+	/Users/yuanjian/Desktop/go/github.com/yuanjianUP/gohub/app/http/middlewares/limit.go:23
+github.com/gin-gonic/gin.(*Context).Next
+	/Users/yuanjian/go/pkg/mod/github.com/gin-gonic/gin@v1.8.1/context.go:173
+gohub/app/http/middlewares.Recovery.func1
+	/Users/yuanjian/Desktop/go/github.com/yuanjianUP/gohub/app/http/middlewares/recovery.go:61
+github.com/gin-gonic/gin.(*Context).Next
+	/Users/yuanjian/go/pkg/mod/github.com/gin-gonic/gin@v1.8.1/context.go:173
+gohub/app/http/middlewares.Logger.func1
+	/Users/yuanjian/Desktop/go/github.com/yuanjianUP/gohub/app/http/middlewares/logger.go:43
+github.com/gin-gonic/gin.(*Context).Next
+	/Users/yuanjian/go/pkg/mod/github.com/gin-gonic/gin@v1.8.1/context.go:173
+github.com/gin-gonic/gin.(*Engine).handleHTTPRequest
+	/Users/yuanjian/go/pkg/mod/github.com/gin-gonic/gin@v1.8.1/gin.go:616
+github.com/gin-gonic/gin.(*Engine).ServeHTTP
+	/Users/yuanjian/go/pkg/mod/github.com/gin-gonic/gin@v1.8.1/gin.go:572
+net/http.serverHandler.ServeHTTP
+	/usr/local/go/src/net/http/server.go:2879
+net/http.(*conn).serve
+	/usr/local/go/src/net/http/server.go:1930
+2022-09-12 13:42:27	[31mERROR[0m	response/response.go:74	Error Occurred:	{"error": "signature is invalid"}
+gohub/pkg/response.Error
+	/Users/yuanjian/Desktop/go/github.com/yuanjianUP/gohub/pkg/response/response.go:74
+gohub/app/http/controllers/api/v1/auth.(*LoginController).RefreshToken
+	/Users/yuanjian/Desktop/go/github.com/yuanjianUP/gohub/app/http/controllers/api/v1/auth/login_controller.go:37
+github.com/gin-gonic/gin.(*Context).Next
+	/Users/yuanjian/go/pkg/mod/github.com/gin-gonic/gin@v1.8.1/context.go:173
+gohub/app/http/middlewares.LimitIP.func1
+	/Users/yuanjian/Desktop/go/github.com/yuanjianUP/gohub/app/http/middlewares/limit.go:23
+github.com/gin-gonic/gin.(*Context).Next
+	/Users/yuanjian/go/pkg/mod/github.com/gin-gonic/gin@v1.8.1/context.go:173
+gohub/app/http/middlewares.LimitIP.func1
+	/Users/yuanjian/Desktop/go/github.com/yuanjianUP/gohub/app/http/middlewares/limit.go:23
+github.com/gin-gonic/gin.(*Context).Next
+	/Users/yuanjian/go/pkg/mod/github.com/gin-gonic/gin@v1.8.1/context.go:173
+gohub/app/http/middlewares.Recovery.func1
+	/Users/yuanjian/Desktop/go/github.com/yuanjianUP/gohub/app/http/middlewares/recovery.go:61
+github.com/gin-gonic/gin.(*Context).Next
+	/Users/yuanjian/go/pkg/mod/github.com/gin-gonic/gin@v1.8.1/context.go:173
+gohub/app/http/middlewares.Logger.func1
+	/Users/yuanjian/Desktop/go/github.com/yuanjianUP/gohub/app/http/middlewares/logger.go:43
+github.com/gin-gonic/gin.(*Context).Next
+	/Users/yuanjian/go/pkg/mod/github.com/gin-gonic/gin@v1.8.1/context.go:173
+github.com/gin-gonic/gin.(*Engine).handleHTTPRequest
+	/Users/yuanjian/go/pkg/mod/github.com/gin-gonic/gin@v1.8.1/gin.go:616
+github.com/gin-gonic/gin.(*Engine).ServeHTTP
+	/Users/yuanjian/go/pkg/mod/github.com/gin-gonic/gin@v1.8.1/gin.go:572
+net/http.serverHandler.ServeHTTP
+	/usr/local/go/src/net/http/server.go:2879
+net/http.(*conn).serve
+	/usr/local/go/src/net/http/server.go:1930
+2022-09-12 13:44:55	[31mERROR[0m	mail/dirver_smtp.go:27	发送邮件	{"发件出错": "dial tcp [::1]:1025: connect: connection refused"}
+gohub/pkg/mail.(*SMTP).Send
+	/Users/yuanjian/Desktop/go/github.com/yuanjianUP/gohub/pkg/mail/dirver_smtp.go:27
+gohub/pkg/mail.(*Mailer).Send
+	/Users/yuanjian/Desktop/go/github.com/yuanjianUP/gohub/pkg/mail/mail.go:38
+gohub/pkg/verifycode.(*VerifyCode).SendEmail
+	/Users/yuanjian/Desktop/go/github.com/yuanjianUP/gohub/pkg/verifycode/verifycode.go:59
+gohub/app/http/controllers/api/v1/auth.(*VerifyCodeController).SendUsingEmail
+	/Users/yuanjian/Desktop/go/github.com/yuanjianUP/gohub/app/http/controllers/api/v1/auth/verify_code_controller.go:30
+github.com/gin-gonic/gin.(*Context).Next
+	/Users/yuanjian/go/pkg/mod/github.com/gin-gonic/gin@v1.8.1/context.go:173
+gohub/app/http/middlewares.LimitIP.func1
+	/Users/yuanjian/Desktop/go/github.com/yuanjianUP/gohub/app/http/middlewares/limit.go:23
+github.com/gin-gonic/gin.(*Context).Next
+	/Users/yuanjian/go/pkg/mod/github.com/gin-gonic/gin@v1.8.1/context.go:173
+gohub/app/http/middlewares.LimitIP.func1
+	/Users/yuanjian/Desktop/go/github.com/yuanjianUP/gohub/app/http/middlewares/limit.go:23
+github.com/gin-gonic/gin.(*Context).Next
+	/Users/yuanjian/go/pkg/mod/github.com/gin-gonic/gin@v1.8.1/context.go:173
+gohub/app/http/middlewares.Recovery.func1
+	/Users/yuanjian/Desktop/go/github.com/yuanjianUP/gohub/app/http/middlewares/recovery.go:61
+github.com/gin-gonic/gin.(*Context).Next
+	/Users/yuanjian/go/pkg/mod/github.com/gin-gonic/gin@v1.8.1/context.go:173
+gohub/app/http/middlewares.Logger.func1
+	/Users/yuanjian/Desktop/go/github.com/yuanjianUP/gohub/app/http/middlewares/logger.go:43
+github.com/gin-gonic/gin.(*Context).Next
+	/Users/yuanjian/go/pkg/mod/github.com/gin-gonic/gin@v1.8.1/context.go:173
+github.com/gin-gonic/gin.(*Engine).handleHTTPRequest
+	/Users/yuanjian/go/pkg/mod/github.com/gin-gonic/gin@v1.8.1/gin.go:616
+github.com/gin-gonic/gin.(*Engine).ServeHTTP
+	/Users/yuanjian/go/pkg/mod/github.com/gin-gonic/gin@v1.8.1/gin.go:572
+net/http.serverHandler.ServeHTTP
+	/usr/local/go/src/net/http/server.go:2879
+net/http.(*conn).serve
+	/usr/local/go/src/net/http/server.go:1930
