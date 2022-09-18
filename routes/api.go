@@ -15,6 +15,10 @@ func RegisterAPIRoutes(router *gin.Engine) {
 		uc := new(controllers.UsersController)
 		//获取当前用户
 		v1.GET("/user", middlewares.AuthJWT(), uc.CurrentUser)
+		usersGroup := v1.Group("/users")
+		{
+			usersGroup.GET("", uc.Index)
+		}
 
 		authGroup := v1.Group("/auth")
 		authGroup.Use(middlewares.LimitIP("1000-H"))
@@ -35,6 +39,5 @@ func RegisterAPIRoutes(router *gin.Engine) {
 			authGroup.POST("/password-reset/using-email", pac.ResetByEmail) //邮箱找回密码
 
 		}
-
 	}
 }
