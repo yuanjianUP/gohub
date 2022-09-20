@@ -14,9 +14,9 @@ import (
 )
 
 //paging分页数据
-type paging struct {
+type Paging struct {
 	CurrentPage int    //当前页
-	Perpage     int    //每页条数
+	PerpPage    int    //每页条数
 	TotalPage   int    //总页数
 	TotalCount  int64  //总条数
 	NextPageURL string //下一页的链接
@@ -54,11 +54,11 @@ func Paginate(c *gin.Context, db *gorm.DB, data interface{}, baseURL string, per
 		Error
 	if err != nil {
 		logger.LogIf(err)
-		return paging{}
+		return Paging{}
 	}
 	return Paging{
 		CurrentPage: p.Page,
-		PerPage:     p.PerPage,
+		PerpPage:    p.PerPage,
 		TotalPage:   p.TotalPage,
 		TotalCount:  p.TotalCount,
 		NextPageURL: p.getNextPageURL(),
@@ -69,7 +69,7 @@ func Paginate(c *gin.Context, db *gorm.DB, data interface{}, baseURL string, per
 //初始化分页必须用到的属性，基于这些属性查询数据库
 func (p *Paginator) initProperties(perPage int, baseURL string) {
 	p.BaseURL = p.formatBaseURL(baseURL)
-	p.Perpage = p.getPerPage(perPage)
+	p.PerPage = p.getPerPage(perPage)
 	//排序参数
 	p.Order = p.ctx.DefaultQuery(config.Get("paging.url_query_order"), "asc")
 	p.Sort = p.ctx.DefaultQuery(config.Get("paging.url_query_sort"), "id")
@@ -95,7 +95,7 @@ func (p Paginator) getPerPage(perPage int) int {
 //返回当前页
 func (p Paginator) getCurrentPage() int {
 	//优先获取用户请求的page
-	page := cast.ToInt(p.ctx.Query(config.Get(paging.url_query_page)))
+	page := cast.ToInt(p.ctx.Query(config.Get("paging.url_query_page")))
 	if page <= 0 {
 		return 0
 	}
@@ -122,7 +122,7 @@ func (p Paginator) getTotalPage() int {
 	if p.TotalCount == 0 {
 		return 0
 	}
-	nums := int64(math.Ceil(math.Floor(float64(p.TotalCount)) / float64(p.PerPage)))
+	nums := int64(math.Ceil(float64(p.TotalCount) / float64(p.PerPage)))
 	if nums == 0 {
 		nums = 1
 	}
