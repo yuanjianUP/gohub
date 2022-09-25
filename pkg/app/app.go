@@ -20,3 +20,13 @@ func TimenowInTimezone() time.Time {
 	chinaTimezone, _ := time.LoadLocation(config.GetString("app.timezone"))
 	return time.Now().In(chinaTimezone)
 }
+
+//传参Path拼接站点的url
+func URL(path string) string {
+	return config.Get("app.url") + path
+}
+
+//拼接带v1标识url
+func V1URL(path string) string {
+	return URL("/v1/" + path)
+}

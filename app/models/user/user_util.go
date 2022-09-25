@@ -1,6 +1,7 @@
 package user
 
 import (
+	"gohub/pkg/app"
 	"gohub/pkg/database"
 	"gohub/pkg/paginator"
 
@@ -38,13 +39,13 @@ func All() (users []User) {
 	database.DB.Find(&users)
 	return
 }
-
-//paginate分页内容
-func Paginate(c *gin.Context, perPage int) (users []User, pagin paginator.paging) {
+func Paginate(c *gin.Context, perPage int) (users []User, paging paginator.Paging) {
 	paging = paginator.Paginate(
 		c,
-		database.DB.Model(&users),
+		database.DB.Model(User{}),
 		&users,
-		app.V1URL(database.TableName),
+		app.V1URL(database.TableName(&User{})),
+		perPage,
 	)
+	return
 }

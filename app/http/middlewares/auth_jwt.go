@@ -2,11 +2,12 @@ package middlewares
 
 import (
 	"fmt"
-	"github.com/gin-gonic/gin"
 	"gohub/app/models/user"
 	"gohub/pkg/config"
 	"gohub/pkg/jwt"
 	"gohub/pkg/response"
+
+	"github.com/gin-gonic/gin"
 )
 
 func AuthJWT() gin.HandlerFunc {

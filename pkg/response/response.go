@@ -1,10 +1,11 @@
 package response
 
 import (
-	"github.com/gin-gonic/gin"
 	"gohub/pkg/logger"
-	"gorm.io/gorm"
 	"net/http"
+
+	"github.com/gin-gonic/gin"
+	"gorm.io/gorm"
 )
 
 func JSON(c *gin.Context, data interface{}) {
