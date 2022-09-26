@@ -20,6 +20,12 @@ func RegisterAPIRoutes(router *gin.Engine) {
 			usersGroup.GET("", uc.Index)
 		}
 
+		cg := new(controllers.CategoriesController)
+		cgcGroup := v1.Group("/category"){
+			cgcGroup.POST("",middlewares.AuthJWT(),cg.Store)
+		}
+		
+
 		authGroup := v1.Group("/auth")
 		authGroup.Use(middlewares.LimitIP("1000-H"))
 		{
@@ -27,6 +33,7 @@ func RegisterAPIRoutes(router *gin.Engine) {
 			authGroup.POST("/signup/phone/exist", SupCt.IsPhoneExist)
 			authGroup.POST("/signup/Email/exist", SupCt.IsEmailExist)
 			authGroup.POST("/signup/using-email", SupCt.SignupUsingEmail) //注册用户
+
 			vcc := new(auth.VerifyCodeController)
 			authGroup.POST("/verify-codes/captcha", vcc.ShowCaptcha)
 			authGroup.POST("/verify-codes/email", vcc.SendUsingEmail)
