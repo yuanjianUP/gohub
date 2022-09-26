@@ -20,7 +20,9 @@ func (ctr *UsersController) CurrentUser(c *gin.Context) {
 }
 func (ctrl *UsersController) Index(c *gin.Context) {
 	request := requests.PaginationRequest{}
+
 	err := requests.Validate(&request, c, requests.Pagination)
+
 	if !err {
 		return
 	}

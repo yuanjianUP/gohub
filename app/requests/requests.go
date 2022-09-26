@@ -2,10 +2,11 @@ package requests
 
 import (
 	"fmt"
-	"github.com/gin-gonic/gin"
-	"github.com/thedevsaddam/govalidator"
 	"gohub/pkg/response"
 	"net/http"
+
+	"github.com/gin-gonic/gin"
+	"github.com/thedevsaddam/govalidator"
 )
 
 type ValidateFun func(data interface{}, c *gin.Context) map[string][]string
@@ -18,6 +19,7 @@ func Validate(obj interface{}, c *gin.Context, handler ValidateFun) bool {
 		fmt.Println(err.Error())
 		return false
 	}
+
 	errs := handler(obj, c)
 
 	if len(errs) > 0 {
