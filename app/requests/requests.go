@@ -15,6 +15,7 @@ func Validate(obj interface{}, c *gin.Context, handler ValidateFun) bool {
 		c.AbortWithStatusJSON(http.StatusUnprocessableEntity, gin.H{
 			"error": err.Error(),
 		})
+
 		fmt.Println(err.Error())
 		return false
 	}

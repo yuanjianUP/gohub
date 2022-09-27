@@ -12,21 +12,22 @@ type PaginationRequest struct {
 }
 
 func Pagination(data interface{}, c *gin.Context) map[string][]string {
+
 	rules := govalidator.MapData{
 		"sort":     []string{"in:id,created_at,updated_at"},
 		"order":    []string{"in:asc,desc"},
 		"per_page": []string{"numeric_between:2,100"},
 	}
-	message := govalidator.MapData{
+	messages := govalidator.MapData{
 		"sort": []string{
-			"in:排序仅支持id,created_at,updated_at",
+			"in: 排序字段仅支持 id,created_at,updated_at",
 		},
 		"order": []string{
-			"in:排序规则支持asc,desc",
+			"in: 排序规则仅支持 asc（正序）,desc（倒序）",
 		},
 		"per_page": []string{
-			"numeric_between:每页条数的值介于2，100",
+			"numeric_between: 每页条数的值介于 2~100 之间",
 		},
 	}
-	return validate(data, rules, message)
+	return validate(data, rules, messages)
 }
