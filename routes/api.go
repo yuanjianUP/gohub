@@ -21,10 +21,10 @@ func RegisterAPIRoutes(router *gin.Engine) {
 		}
 
 		cg := new(controllers.CategoriesController)
-		cgcGroup := v1.Group("/category"){
-			cgcGroup.POST("",middlewares.AuthJWT(),cg.Store)
+		cgcGroup := v1.Group("/category")
+		{
+			cgcGroup.POST("", middlewares.AuthJWT(), cg.Store)
 		}
-		
 
 		authGroup := v1.Group("/auth")
 		authGroup.Use(middlewares.LimitIP("1000-H"))

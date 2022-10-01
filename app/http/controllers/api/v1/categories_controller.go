@@ -15,6 +15,7 @@ type CategoriesController struct {
 func (ctrl *CategoriesController) Store(c *gin.Context) {
 	request := requests.CategoryRequest{}
 	ok := requests.Validate(&request, c, requests.CategorySave)
+
 	if !ok {
 		return
 	}
