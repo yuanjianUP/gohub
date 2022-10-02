@@ -1,4 +1,4 @@
 .vscode
-.tmp
+/tmp
 .idea
 /storage/logs
