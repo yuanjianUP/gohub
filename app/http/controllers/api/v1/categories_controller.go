@@ -26,6 +26,7 @@ func (ctrl *CategoriesController) Store(c *gin.Context) {
 	categoryModel.Create()
 	if categoryModel.ID > 0 {
 		response.Created(c, categoryModel)
+	} else {
+		response.Abort500(c, "创建失败,请稍后再试")
 	}
-	response.Abort500(c, "创建失败,请稍后再试")
 }

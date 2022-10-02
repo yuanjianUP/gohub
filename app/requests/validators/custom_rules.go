@@ -18,42 +18,49 @@ func init() {
 	// not_exists:users,email 检查数据库表里是否存在同一条信息
 	// not_exists:users,email,32 排除用户掉 id 为 32 的用户
 	govalidator.AddCustomRule("not_exists", func(field string, rule string, message string, value interface{}) error {
-		rng := strings.Split(strings.TrimPrefix(rule, "not_exists:"), ".")
-		//第一参数，标名称如users
+		rng := strings.Split(strings.TrimPrefix(rule, "not_exists:"), ",")
+
+		// 第一个参数，表名称，如 users
 		tableName := rng[0]
-		//第二个参数，字段名称,如email或者phone
+		// 第二个参数，字段名称，如 email 或者 phone
 		dbFiled := rng[1]
-		//第三个参数,排除id
+
+		// 第三个参数，排除 ID
 		var exceptID string
 		if len(rng) > 2 {
 			exceptID = rng[2]
 		}
-		//用户请求过来的数据
+
+		// 用户请求过来的数据
 		requestValue := value.(string)
-		//拼接sql
+		// 拼接 SQL
 		query := database.DB.Table(tableName).Where(dbFiled+" = ?", requestValue)
-		//如果传参第三个参数,加上sql where过滤
+
+		// 如果传参第三个参数，加上 SQL Where 过滤
 		if len(exceptID) > 0 {
 			query.Where("id != ?", exceptID)
 		}
-		//查询数据库
+
+		// 查询数据库
 		var count int64
 		query.Count(&count)
-		//验证不通过，数据库能找到对应的数据
+
+		// 验证不通过，数据库能找到对应的数据
 		if count != 0 {
-			//如果有自定义错误消息的话
+			// 如果有自定义错误消息的话
 			if message != "" {
 				return errors.New(message)
 			}
-			//默认错误消息
+			// 默认的错误消息
 			return fmt.Errorf("%v 已被占用", requestValue)
 		}
+		// 验证通过
 		return nil
 	})
 
 	govalidator.AddCustomRule("max_cn", func(field string, rule string, message string, value interface{}) error {
 		varLength := utf8.RuneCountInString(value.(string))
-		l, _ := strconv.Atoi(strings.TrimPrefix(rule, "max_cn"))
+		l, _ := strconv.Atoi(strings.TrimPrefix(rule, "max_cn:"))
 		if varLength > l {
 			//如果有自定义消息的话，使用自定义消息
 			if message != "" {
@@ -66,7 +73,7 @@ func init() {
 
 	govalidator.AddCustomRule("min_cn", func(field string, rule string, message string, value interface{}) error {
 		varLength := utf8.RuneCountInString(value.(string))
-		l, _ := strconv.Atoi(strings.TrimPrefix(rule, "min_cn"))
+		l, _ := strconv.Atoi(strings.TrimPrefix(rule, "min_cn:"))
 		if varLength < l {
 			//如果有自定义消息的话，使用自定义消息
 			if message != "" {
