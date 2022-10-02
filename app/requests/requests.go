@@ -1,9 +1,7 @@
 package requests
 
 import (
-	"fmt"
 	"gohub/pkg/response"
-	"net/http"
 
 	"github.com/gin-gonic/gin"
 	"github.com/thedevsaddam/govalidator"
@@ -12,12 +10,8 @@ import (
 type ValidateFun func(data interface{}, c *gin.Context) map[string][]string
 
 func Validate(obj interface{}, c *gin.Context, handler ValidateFun) bool {
-	if err := c.ShouldBindJSON(obj); err != nil { //接收参数
-		c.AbortWithStatusJSON(http.StatusUnprocessableEntity, gin.H{
-			"error": err.Error(),
-		})
-
-		fmt.Println(err.Error())
+	if err := c.ShouldBind(obj); err != nil { //接收参数
+		response.BadRequest(c, err, "请求解析错误，请确认请求格式是否正确。上传文件请使用 multipart 标头，参数请使用 JSON 格式。")
 		return false
 	}
 
