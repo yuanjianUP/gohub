@@ -14,5 +14,6 @@ func SetupCache() {
 		config.GetString("redis.password"),
 		config.GetInt("redis.database_chache"),
 	)
+	fmt.Println(rds)
 	cache.InitWithCacheStore(rds)
 }
