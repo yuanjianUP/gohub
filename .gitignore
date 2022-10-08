@@ -2,3 +2,4 @@
 .tmp
 .idea
 /storage/logs
+.env
