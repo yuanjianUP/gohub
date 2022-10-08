@@ -23,7 +23,10 @@ func RegisterAPIRoutes(router *gin.Engine) {
 		cg := new(controllers.CategoriesController)
 		cgcGroup := v1.Group("/categories")
 		{
+			cgcGroup.GET("", middlewares.AuthJWT(), cg.Index)
 			cgcGroup.POST("", middlewares.AuthJWT(), cg.Store)
+			cgcGroup.PUT("/:id", middlewares.AuthJWT(), cg.Update)
+			cgcGroup.DELETE("/:id", middlewares.AuthJWT(), cg.Delete)
 		}
 
 		authGroup := v1.Group("/auth")

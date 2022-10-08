@@ -1,5 +1,5 @@
 .vscode
-.tmp
+/tmp
 .idea
 /storage/logs
 .env
