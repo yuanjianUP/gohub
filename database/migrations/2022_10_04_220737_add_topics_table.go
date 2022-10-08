@@ -18,7 +18,7 @@ func init() {
 	}
 	type Topic struct {
 		models.BaseModel
-		Title      string `gorm:"type:varchar(255);not null;index"`
+		Title      string `gorm:"type:varchar(127);not null;index"`
 		Body       string `gorm:"type:longtext;not null"`
 		UserID     string `gorm:"type:bigint;not null;index"`
 		CategoryID string `gorm:"type:bigInt;not null;index"`
