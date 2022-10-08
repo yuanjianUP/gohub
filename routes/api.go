@@ -20,6 +20,7 @@ func RegisterAPIRoutes(router *gin.Engine) {
 			usersGroup.GET("", uc.Index)
 		}
 
+		//分类
 		cg := new(controllers.CategoriesController)
 		cgcGroup := v1.Group("/categories")
 		{
@@ -48,6 +49,12 @@ func RegisterAPIRoutes(router *gin.Engine) {
 			pac := new(auth.PasswordController)
 			authGroup.POST("/password-reset/using-email", pac.ResetByEmail) //邮箱找回密码
 
+		}
+
+		lsc := new(controllers.LinksController)
+		linksGroup := v1.Group("/links")
+		{
+			linksGroup.GET("", lsc.Index)
 		}
 	}
 }
