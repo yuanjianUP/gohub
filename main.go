@@ -68,6 +68,8 @@ func main() {
 	route := gin.New()
 	bootstrap.SetupRote(route)
 	bootstrap.SetupRedis()
+	//初始化缓存
+	bootstrap.SetupCache()
 	err := route.Run(":" + config.Get("app.port"))
 	if err != nil {
 		fmt.Println(err.Error())
