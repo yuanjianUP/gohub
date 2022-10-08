@@ -7,7 +7,7 @@ type Store interface {
 	Get(key string) string
 	Has(key string) bool
 	Forget(key string)
-	forever(key string, value string)
+	Forever(key string, value string)
 	Flush()
 	IsAlive() error
 
