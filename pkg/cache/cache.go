@@ -1,3 +1,4 @@
+// Package cache 缓存工具类，可以缓存各种类型包括 struct 对象
 package cache
 
 import (
@@ -42,6 +43,10 @@ func Has(key string) bool {
 	return Cache.Store.Has(key)
 }
 
+// GetObject 应该传地址，用法如下:
+//
+//	model := user.User{}
+//	cache.GetObject("key", &model)
 func GetObject(key string, wanted interface{}) {
 	val := Cache.Store.Get(key)
 	if len(val) > 0 {
