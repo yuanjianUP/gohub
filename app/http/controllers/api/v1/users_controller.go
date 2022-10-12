@@ -103,3 +103,11 @@ func (ctr *UsersController) UpdatePassword(c *gin.Context) {
 	}
 
 }
+
+func (ctrl *UsersController) UserUpdateAvatar(c *gin.Context) {
+	request := requests.UserUpdateAvatarRequest{}
+	if ok := requests.Validate(&request, c, requests.UserUpdateAvatar); !ok {
+		return
+	}
+
+}
