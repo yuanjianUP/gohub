@@ -46,6 +46,38 @@ func (ctr *UsersController) Update(c *gin.Context) {
 	rowsAffected := currentModel.Save()
 	if rowsAffected > 0 {
 		response.Data(c, currentModel)
+		return
 	}
 	response.Abort500(c, "跟新失败，请稍后再试")
+}
+
+func (ctr *UsersController) UpdateEmail(c *gin.Context) {
+	request := requests.UserUpdateEmailRequest{}
+	if ok := requests.Validate(&request, c, requests.UserUpdateEmail); !ok {
+		return
+	}
+	currentModel := auth.CurrentUser(c)
+	currentModel.Email = request.Email
+	rowsAffected := currentModel.Save()
+	if rowsAffected > 0 {
+		response.Data(c, currentModel)
+	} else {
+		response.Abort500(c, "邮箱更新失败")
+	}
+}
+
+func (ctr *UsersController) UpdatePhone(c *gin.Context) {
+	request := requests.UserUpdatePhoneRequest{}
+	if ok := requests.Validate(&request, c, requests.UserUpdatePhone); !ok {
+		return
+	}
+	currentUser := auth.CurrentUser(c)
+	currentUser.Phone = request.Phone
+	rowsAffected := currentUser.Save()
+	if rowsAffected > 0 {
+		response.Success(c)
+	} else {
+		response.Abort500(c, "更新失败")
+	}
+
 }
