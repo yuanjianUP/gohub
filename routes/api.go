@@ -21,6 +21,7 @@ func RegisterAPIRoutes(router *gin.Engine) {
 			usersGroup.PUT("", middlewares.AuthJWT(), uc.Update)
 			usersGroup.PUT("/email", middlewares.AuthJWT(), uc.UpdateEmail)
 			usersGroup.PUT("/phone", middlewares.AuthJWT(), uc.UpdatePhone)
+			usersGroup.PUT("/password", middlewares.AuthJWT(), uc.UpdatePassword)
 		}
 
 		//分类
