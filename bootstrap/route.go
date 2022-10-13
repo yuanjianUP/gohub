@@ -1,11 +1,12 @@
 package bootstrap
 
 import (
-	"github.com/gin-gonic/gin"
 	"gohub/app/http/middlewares"
 	"gohub/routes"
 	"net/http"
 	"strings"
+
+	"github.com/gin-gonic/gin"
 )
 
 func SetupRote(router *gin.Engine) {
@@ -18,6 +19,7 @@ func registerGlobalMiddle(route *gin.Engine) {
 	route.Use(
 		middlewares.Logger(),
 		middlewares.Recovery(),
+		middlewares.ForceUA(),
 	)
 }
 func seup404Handler(router *gin.Engine) {
