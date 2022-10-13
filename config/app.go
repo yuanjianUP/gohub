@@ -27,6 +27,9 @@ func init() {
 
 			// 设置时区，JWT 里会使用，日志记录里也会使用到
 			"timezone": config.Env("TIMEZONE", "Asia/Shanghai"),
+
+			//api域名，未设置的话所有api url 加api前缀，加http://domain.com/api/v1/users
+			"api_domain": config.Env("API_DOMAIN"),
 		}
 	})
 	config.Add("database", func() map[string]interface{} {

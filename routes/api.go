@@ -4,12 +4,19 @@ import (
 	controllers "gohub/app/http/controllers/api/v1"
 	"gohub/app/http/controllers/api/v1/auth"
 	"gohub/app/http/middlewares"
+	"gohub/pkg/config"
 
 	"github.com/gin-gonic/gin"
 )
 
 func RegisterAPIRoutes(router *gin.Engine) {
-	v1 := router.Group("/v1")
+	var v1 *gin.RouterGroup
+	if len(config.Get("app.api_domain")) == 0 {
+		v1 = router.Group("/api/v1")
+	} else {
+		v1 = router.Group("/v1")
+	}
+
 	v1.Use(middlewares.LimitIP("200-H"))
 	{
 		uc := new(controllers.UsersController)
