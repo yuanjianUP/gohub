@@ -113,7 +113,8 @@ func (ctrl *UsersController) UserUpdateAvatar(c *gin.Context) {
 	}
 	avatar, err := file.SaveUploadAvator(c, request.Avatar)
 	if err != nil {
-		response.Abort500(c, "上传头像失败，请稍后尝试")
+		response.Error(c, err)
+		//response.Abort500(c, "上传头像失败，请稍后尝试")
 		return
 	}
 	currentUser := auth.CurrentUser(c)
