@@ -34,7 +34,7 @@ func init() {
 		// 用户请求过来的数据
 		requestValue := value.(string)
 		// 拼接 SQL
-		query := database.DB.Table(tableName).Where(dbFiled+" = ?", requestValue)
+		query := database.DB().Table(tableName).Where(dbFiled+" = ?", requestValue)
 
 		// 如果传参第三个参数，加上 SQL Where 过滤
 		if len(exceptID) > 0 {

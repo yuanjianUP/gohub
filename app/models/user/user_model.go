@@ -21,7 +21,7 @@ type User struct {
 }
 
 func (userModel *User) Create() {
-	database.DB.Create(&userModel)
+	database.DB().Create(&userModel)
 }
 
 //判断密码是否正确
@@ -30,6 +30,6 @@ func (userModel *User) ComparePassword(_password string) bool {
 }
 
 func (userModel *User) Save() (rowsAffected int64) {
-	result := database.DB.Save(&userModel)
+	result := database.DB().Save(&userModel)
 	return result.RowsAffected
 }

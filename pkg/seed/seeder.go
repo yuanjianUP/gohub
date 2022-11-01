@@ -55,7 +55,7 @@ func RunAll() {
 		sdr := GetSeeder(name)
 		if len(sdr.Name) > 0 {
 			console.Warning("Running ordered seeder:" + sdr.Name)
-			sdr.Func(database.DB)
+			sdr.Func(database.DB())
 			executed[name] = name
 		}
 	}
@@ -64,7 +64,7 @@ func RunAll() {
 		//过滤已运行
 		if _, ok := executed[sdr.Name]; !ok {
 			console.Warning("running seeder: " + sdr.Name)
-			sdr.Func(database.DB)
+			sdr.Func(database.DB())
 		}
 	}
 }
@@ -73,7 +73,7 @@ func RunAll() {
 func RunSeeder(name string) {
 	for _, sdr := range seeders {
 		if name == sdr.Name {
-			sdr.Func(database.DB)
+			sdr.Func(database.DB())
 			break
 		}
 	}

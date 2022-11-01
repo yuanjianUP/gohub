@@ -25,15 +25,15 @@ type Topic struct {
 }
 
 func (topic *Topic) Create() {
-	database.DB.Create(&topic)
+	database.DB().Create(&topic)
 }
 
 func (topic *Topic) Save() (rowsAffected int64) {
-	result := database.DB.Save(&topic)
+	result := database.DB().Save(&topic)
 	return result.RowsAffected
 }
 
 func (topic *Topic) Delete() (rowsAffected int64) {
-	result := database.DB.Delete(&topic)
+	result := database.DB().Delete(&topic)
 	return result.RowsAffected
 }

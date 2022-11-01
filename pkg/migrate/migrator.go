@@ -28,8 +28,8 @@ func NewMigrator() *Migrator {
 	//初始化必要属性
 	migrator := &Migrator{
 		Folder:   "database/migrations/",
-		DB:       database.DB,
-		Migrator: database.DB.Migrator(),
+		DB:       database.DB(),
+		Migrator: database.DB().Migrator(),
 	}
 	//migrations不存在的话就创建它
 	migrator.createMigrationsTable()
@@ -95,7 +95,7 @@ func (migrator *Migrator) rollbackMigrations(migrations []Migration) bool {
 		//执行迁移文件的down方法
 		mfile := getMigrationFile(_migration.Migration)
 		if mfile.Down != nil {
-			mfile.Down(database.DB.Migrator(), database.SQLDB)
+			mfile.Down(database.DB().Migrator(), database.SQLDB())
 		}
 		runed = true
 		//回退成功了就删除这条记录
@@ -147,7 +147,7 @@ func (migrator *Migrator) runUpMigration(mfile MigrationFile, batch int) {
 		//友好提示
 		console.Warning("migrating" + mfile.FileName)
 		//执行up方法
-		mfile.Up(database.DB.Migrator(), database.SQLDB)
+		mfile.Up(database.DB().Migrator(), database.SQLDB())
 		//提示一迁移了哪个文件
 		console.Success("migrated" + mfile.FileName)
 	}
